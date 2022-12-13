@@ -1,0 +1,47 @@
+(research) lahirukavindarathnayake@Lahirus-MacBook-Pro deep-rule-visualizer % ./main.py --d iroads
+Features are already available in features/iroads directory.
+
+###################### Data Loaded ######################
+Data Shape:
+X train:  (2793, 4096)
+Y train:  (2793, 2)
+X test:  (1863, 4096)
+Y test:  (1863, 2)
+###################### Model Trained ####################
+Time:  24.06 seconds
+(research) lahirukavindarathnayake@Lahirus-MacBook-Pro deep-rule-visualizer % ./main.py --d iroads
+Features are already available in features/iroads directory.
+
+###################### Data Loaded ######################
+Data Shape:
+X train:  (2793, 4096)
+Y train:  (2793, 2)
+X test:  (1863, 4096)
+Y test:  (1863, 2)
+###################### Model Trained ####################
+Time:  23.59 seconds
+(research) lahirukavindarathnayake@Lahirus-MacBook-Pro deep-rule-visualizer % ./main.py --d iroads
+Features are already available in features/iroads directory.
+
+###################### Data Loaded ######################
+Data Shape:
+X train:  (2793, 4096)
+Y train:  (2793, 2)
+X test:  (1863, 4096)
+Y test:  (1863, 2)
+###################### Model Trained ####################
+Time:  24.72 seconds
+###################### Results ##########################
+Time:  349.61 seconds
+Accuracy: 1.000000
+Precision: 1.000000
+Recall: 1.000000
+F1 score: 1.000000
+Cohens kappa: 1.000000
+Confusion Matrix:  [[443   0   0   0   0   0   0]
+ [  0 114   0   0   0   0   0]
+ [  0   0 188   0   0   0   0]
+ [  0   0   0 340   0   0   0]
+ [  0   0   0   0 236   0   0]
+ [  0   0   0   0   0 404   0]
+ [  0   0   0   0   0   0 138]]
