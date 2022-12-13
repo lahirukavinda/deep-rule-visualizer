@@ -123,15 +123,22 @@ def DecisionMaking(Params, datates):
         data = datates[i - 1,]
         R = np.zeros((VV, CurrentNC))
         Value = np.zeros((CurrentNC, 1))
+        top_distances_index = np.zeros((CurrentNC, 5))
         for k in range(0, CurrentNC):
             distance = np.sort(cdist(data.reshape(1, -1), PARAM[k]['Centre'], 'minkowski', p=6))[0]
             # distance=np.sort(cdist(data.reshape(1, -1),PARAM[k]['Centre'],'euclidean'))[0]
+
+            distance_index = np.argsort(cdist(data.reshape(1, -1), PARAM[k]['Centre'], 'minkowski', p=6))[0]
+            top_distances_index[k] = distance_index[0:5]
+
             Value[k] = distance[0]
         Value = softmax(-1 * Value ** 2).T
         Scores[i - 1,] = Value
         Value = Value[0]
         Value_new = np.sort(Value)[::-1]
         indx = np.argsort(Value)[::-1]
+        matching_label = indx[0]
+        print(f"\nMatching label : {matching_label}\nTop 5 matching prototypes : \n", np.array(list((PARAM[matching_label]['Prototype']).items()))[top_distances_index[matching_label].astype(int)])
         EstimatedLabels[i - 1] = indx[0]
     LABEL1 = np.zeros((CurrentNC, 1))
 

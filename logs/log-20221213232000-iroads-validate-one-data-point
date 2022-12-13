@@ -1,0 +1,22 @@
+(research) lahirukavindarathnayake@Lahirus-MacBook-Pro deep-rule-visualizer % ./run.py -d iroads
+Features are already available in features/iroads directory.
+
+###################### Data Loaded ######################
+Data Shape:
+X train:  (2793, 4096)
+Y train:  (2793, 2)
+X test:  (1863, 4096)
+Y test:  (1863, 2)
+###################### Model Trained ####################
+Time:  23.82 seconds
+
+Validate for image : RainyDay_00607.jpeg
+Original label : 0
+
+Matching label : 0
+Top 5 matching prototypes :
+ [['515' 'RainyDay_00608.jpeg']
+ ['303' 'RainyDay_00610.jpeg']
+ ['468' 'RainyDay_00609.jpeg']
+ ['508' 'RainyDay_00615.jpeg']
+ ['300' 'RainyDay_00612.jpeg']]

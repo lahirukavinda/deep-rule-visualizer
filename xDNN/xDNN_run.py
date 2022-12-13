@@ -84,9 +84,17 @@ def xDNN_run(data_set):
 
     Input2 = {}
     Input2['xDNNParms'] = Output1['xDNNParms']
-    Input2['Images'] = y_test_images
-    Input2['Features'] = X_test
-    Input2['Labels'] = y_test_labels
+
+    # Validate testing dataset
+    # Input2['Images'] = y_test_images
+    # Input2['Features'] = X_test
+    # Input2['Labels'] = y_test_labels
+
+    # Validate only the first image of testing dataset
+    Input2['Images'] = y_test_images[0:1]  # y_test_images[0].reshape(1,-1)
+    Input2['Features'] = X_test[0:1]
+    Input2['Labels'] = y_test_labels[0:1]
+    print(f"\nValidate for image : {Input2['Images'][0]}\nOriginal label : {Input2['Labels'][0]}")
 
 
 
@@ -95,27 +103,27 @@ def xDNN_run(data_set):
     Output2 = xDNN(Input2,Mode2)
     endValidation = time.time()
 
-    print ("###################### Results ##########################")
-
-
-    # Elapsed Time
-    print("Time: ", round(endValidation - startValidation,2), "seconds")
-    # accuracy: (tp + tn) / (p + n)
-    accuracy = accuracy_score(y_test_labels , Output2['EstLabs'])
-    print('Accuracy: %f' % accuracy)
-    # precision tp / (tp + fp)
-    precision = precision_score(y_test_labels , Output2['EstLabs'], average='micro')
-    print('Precision: %f' % precision)
-    # recall: tp / (tp + fn)
-    recall = recall_score(y_test_labels , Output2['EstLabs'],average='micro')
-    print('Recall: %f' % recall)
-    # f1: 2 tp / (2 tp + fp + fn)
-    f1 = f1_score(y_test_labels , Output2['EstLabs'], average='micro')
-    print('F1 score: %f' % f1)
-    # kappa
-    kappa = cohen_kappa_score(y_test_labels , Output2['EstLabs'])
-    print('Cohens kappa: %f' % kappa)
-
-    # confusion matrix
-    matrix = confusion_matrix(y_test_labels , Output2['EstLabs'])
-    print("Confusion Matrix: ",matrix)
+    # print ("###################### Results ##########################")
+    #
+    #
+    # # Elapsed Time
+    # print("Time: ", round(endValidation - startValidation,2), "seconds")
+    # # accuracy: (tp + tn) / (p + n)
+    # accuracy = accuracy_score(y_test_labels , Output2['EstLabs'])
+    # print('Accuracy: %f' % accuracy)
+    # # precision tp / (tp + fp)
+    # precision = precision_score(y_test_labels , Output2['EstLabs'], average='micro')
+    # print('Precision: %f' % precision)
+    # # recall: tp / (tp + fn)
+    # recall = recall_score(y_test_labels , Output2['EstLabs'],average='micro')
+    # print('Recall: %f' % recall)
+    # # f1: 2 tp / (2 tp + fp + fn)
+    # f1 = f1_score(y_test_labels , Output2['EstLabs'], average='micro')
+    # print('F1 score: %f' % f1)
+    # # kappa
+    # kappa = cohen_kappa_score(y_test_labels , Output2['EstLabs'])
+    # print('Cohens kappa: %f' % kappa)
+    #
+    # # confusion matrix
+    # matrix = confusion_matrix(y_test_labels , Output2['EstLabs'])
+    # print("Confusion Matrix: ",matrix)
