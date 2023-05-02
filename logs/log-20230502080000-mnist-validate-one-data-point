@@ -1,0 +1,120 @@
+/Users/lahirukavindarathnayake/opt/anaconda3/envs/research/bin/python3.8 /Users/lahirukavindarathnayake/Desktop/projects/deep-rule-visualizer/run.py -d mnist
+Extracting features from mnist data set...
+2023-05-01 23:39:55.151883: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Model: "model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #
+=================================================================
+ input_1 (InputLayer)        [(None, 224, 224, 3)]     0
+
+ block1_conv1 (Conv2D)       (None, 224, 224, 64)      1792
+
+ block1_conv2 (Conv2D)       (None, 224, 224, 64)      36928
+
+ block1_pool (MaxPooling2D)  (None, 112, 112, 64)      0
+
+ block2_conv1 (Conv2D)       (None, 112, 112, 128)     73856
+
+ block2_conv2 (Conv2D)       (None, 112, 112, 128)     147584
+
+ block2_pool (MaxPooling2D)  (None, 56, 56, 128)       0
+
+ block3_conv1 (Conv2D)       (None, 56, 56, 256)       295168
+
+ block3_conv2 (Conv2D)       (None, 56, 56, 256)       590080
+
+ block3_conv3 (Conv2D)       (None, 56, 56, 256)       590080
+
+ block3_pool (MaxPooling2D)  (None, 28, 28, 256)       0
+
+ block4_conv1 (Conv2D)       (None, 28, 28, 512)       1180160
+
+ block4_conv2 (Conv2D)       (None, 28, 28, 512)       2359808
+
+ block4_conv3 (Conv2D)       (None, 28, 28, 512)       2359808
+
+ block4_pool (MaxPooling2D)  (None, 14, 14, 512)       0
+
+ block5_conv1 (Conv2D)       (None, 14, 14, 512)       2359808
+
+ block5_conv2 (Conv2D)       (None, 14, 14, 512)       2359808
+
+ block5_conv3 (Conv2D)       (None, 14, 14, 512)       2359808
+
+ block5_pool (MaxPooling2D)  (None, 7, 7, 512)         0
+
+ flatten (Flatten)           (None, 25088)             0
+
+ fc1 (Dense)                 (None, 4096)              102764544
+
+ fc2 (Dense)                 (None, 4096)              16781312
+
+=================================================================
+Total params: 134,260,544
+Trainable params: 134,260,544
+Non-trainable params: 0
+_________________________________________________________________
+['.DS_Store', '9', '0', '7', '6', '1', '8', '4', '3', '2', '5']
+['9', '0', '7', '6', '1', '8', '4', '3', '2', '5']
+Starting 9 images
+Starting 0 images
+Starting 7 images
+Starting 6 images
+Starting 1 images
+Starting 8 images
+Starting 4 images
+Starting 3 images
+Starting 2 images
+Starting 5 images
+['.DS_Store', '9', '0', '7', '6', '1', '8', '4', '3', '2', '5']
+['9', '0', '7', '6', '1', '8', '4', '3', '2', '5']
+Starting 9 images
+Starting 0 images
+Starting 7 images
+Starting 6 images
+Starting 1 images
+Starting 8 images
+Starting 4 images
+Starting 3 images
+Starting 2 images
+Starting 5 images
+(10000, 4096)
+(10000,)
+       0         1     2         3     ...  4092      4093  4094      4095
+0       0.0  3.494159   0.0  0.000000  ...   0.0  0.000000   0.0  4.266108
+1       0.0  3.827240   0.0  0.000000  ...   0.0  0.000000   0.0  4.487382
+2       0.0  2.188959   0.0  0.000000  ...   0.0  0.000000   0.0  3.925731
+3       0.0  3.944051   0.0  0.095322  ...   0.0  0.000000   0.0  4.059212
+4       0.0  4.169955   0.0  0.000000  ...   0.0  0.000000   0.0  4.345299
+...     ...       ...   ...       ...  ...   ...       ...   ...       ...
+59995   0.0  1.265851   0.0  0.000000  ...   0.0  0.000000   0.0  3.914121
+59996   0.0  4.015915   0.0  0.633867  ...   0.0  0.913800   0.0  2.591434
+59997   0.0  2.737328   0.0  0.000000  ...   0.0  0.000000   0.0  3.814631
+59998   0.0  2.376875   0.0  0.000000  ...   0.0  0.000000   0.0  4.784415
+59999   0.0  2.838808   0.0  0.491010  ...   0.0  1.321523   0.0  2.552636
+
+[60000 rows x 4096 columns]
+Features were stored in features/mnist directory.
+
+###################### Data Loaded ######################
+Data Shape:
+X train:  (60000, 4096)
+Y train:  (60000, 2)
+X test:  (10000, 4096)
+Y test:  (10000, 2)
+###################### Model Trained ####################
+Time:  8145.18 seconds
+
+Validate for image : 9_00639.jpg
+Original label : 9
+
+Matching label : 9
+Top 5 matching prototypes :
+ [['5230' '9_05772.jpg']
+ ['3354' '9_03367.jpg']
+ ['5211' '9_05776.jpg']
+ ['39' '9_04488.jpg']
+ ['5115' '9_01666.jpg']]
+
+Process finished with exit code 0

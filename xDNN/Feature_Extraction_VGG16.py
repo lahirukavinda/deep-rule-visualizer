@@ -85,3 +85,77 @@ def VGG16_feature_extract(data_set, data_dir):
     data_df_y_train.to_csv(f'features_{data_set}/data_df_y_train.csv', header=False, index=False)
     data_df_X_test.to_csv(f'features_{data_set}/data_df_X_test.csv', header=False, index=False)
     data_df_y_test.to_csv(f'features_{data_set}/data_df_y_test.csv', header=False, index=False)
+
+
+def VGG16_feature_extract_mnist(data_set, data_dir):
+    # Load VGG-16 model
+    model = VGG16(weights='imagenet', include_top=True)
+    layer_name = 'fc2'
+    intermediate_layer_model = keras.Model(inputs=model.input, outputs=model.get_layer(layer_name).output)
+    intermediate_layer_model.summary()
+
+    # Load the data directory  where the images are stored
+    data_dir_local = f"{data_dir}train/";
+    contents = os.listdir(data_dir_local)
+    classes = [each for each in contents if os.path.isdir(data_dir_local + each)]
+    # Each folder becomes a different class
+
+    print(contents)
+    print(classes)
+
+    X_train, y_train = get_VGG16_feature_mnist(classes, data_dir_local, intermediate_layer_model)
+
+    data_dir_local = f"{data_dir}test/"
+    contents = os.listdir(data_dir_local)
+    classes = [each for each in contents if os.path.isdir(data_dir_local + each)]
+    # Each folder becomes a different class
+
+    print(contents)
+    print(classes)
+
+    X_test, y_test = get_VGG16_feature_mnist(classes, data_dir_local, intermediate_layer_model)
+
+    print(X_test.shape)
+    print(y_test.shape)
+
+    # Convert data to Pandas in order to save as .csv
+    import pandas as pd
+
+    data_df_X_train = pd.DataFrame(X_train)
+    data_df_y_train = pd.DataFrame(y_train)
+    data_df_X_test = pd.DataFrame(X_test)
+    data_df_y_test = pd.DataFrame(y_test)
+
+    print(data_df_X_train)
+
+    # Save file as .csv
+    data_df_X_train.to_csv(f'features_{data_set}/data_df_X_train.csv', header=False, index=False)
+    data_df_y_train.to_csv(f'features_{data_set}/data_df_y_train.csv', header=False, index=False)
+    data_df_X_test.to_csv(f'features_{data_set}/data_df_X_test.csv', header=False, index=False)
+    data_df_y_test.to_csv(f'features_{data_set}/data_df_y_test.csv', header=False, index=False)
+
+
+def get_VGG16_feature_mnist(classes, data_dir_local, intermediate_layer_model):
+    batch = []
+    labels = []
+    for each in classes:  # Loop for the folders
+        print("Starting {} images".format(each))
+        class_path = data_dir_local + each
+        files = os.listdir(class_path)
+
+        for ii, file in enumerate(files, 1):  # Loop for the imgs inside the folders
+            # Load the images and resize it to 224X224(VGG-16 size)
+            img = image.load_img(os.path.join(class_path, file), target_size=(224, 224))
+            x = image.img_to_array(img)
+            x = np.expand_dims(x, axis=0)
+            x = preprocess_input(x)
+            # Extract features using the VGG-16 structure
+            features = intermediate_layer_model.predict(x)
+            # Append features and labels
+            batch.append(features[0])
+            labels.append(file + ';' + each)
+            # print("finish {}".format(ii))
+
+    X_train = np.array(batch)
+    y_train = np.array(labels)
+    return X_train, y_train
