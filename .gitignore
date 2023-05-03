@@ -5,3 +5,5 @@
 /.idea/inspectionProfiles/profiles_settings.xml
 /.idea/vcs.xml
 /features_*
+/trained_model_*
+/testdata_results_*
