@@ -1,0 +1,25 @@
+/Users/lahirukavindarathnayake/opt/anaconda3/envs/research/bin/python3.8 /Users/lahirukavindarathnayake/Desktop/projects/deep-rule-visualizer/run.py -d mnist
+Features are already available in features/mnist directory.
+
+###################### Data Loaded ######################
+Data Shape:
+X train:  (60000, 4096)
+Y train:  (60000, 2)
+X test:  (10000, 4096)
+Y test:  (10000, 2)
+Training model for mnist data set...
+###################### Model Trained ####################
+Time:  8090.79 seconds
+Validating model for testdata of mnist data set...
+Traceback (most recent call last):
+  File "/Users/lahirukavindarathnayake/Desktop/projects/deep-rule-visualizer/run.py", line 31, in <module>
+    xDNN_run(data_set)
+  File "/Users/lahirukavindarathnayake/Desktop/projects/deep-rule-visualizer/xDNN/xDNN_run.py", line 108, in xDNN_run
+    Output2 = xDNN(Input2, Mode2, data_set)
+  File "/Users/lahirukavindarathnayake/Desktop/projects/deep-rule-visualizer/xDNN/xDNN_class.py", line 31, in xDNN
+    Test_Results = DecisionMaking(Params, datates, Images, Labels, data_set)
+  File "/Users/lahirukavindarathnayake/Desktop/projects/deep-rule-visualizer/xDNN/xDNN_class.py", line 135, in DecisionMaking
+    distance_array[k] = distance
+IndexError: list assignment index out of range
+
+Process finished with exit code 1

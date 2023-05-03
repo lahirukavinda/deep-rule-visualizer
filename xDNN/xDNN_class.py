@@ -1,9 +1,3 @@
-"""
-Please cite:
-
-Angelov, P., & Soares, E. (2020). Towards explainable deep neural networks (xDNN). Neural Networks.
-"""
-
 import math
 import numpy as np
 from scipy.spatial.distance import cdist
@@ -11,7 +5,7 @@ from sklearn.metrics import confusion_matrix
 from scipy.special import softmax
 
 
-def xDNN(Input, Mode):
+def xDNN(Input, Mode, data_set):
     if Mode == 'Learning':
         Images = Input['Images']
         Features = Input['Features']
@@ -32,7 +26,9 @@ def xDNN(Input, Mode):
     elif Mode == 'Validation':
         Params = Input['xDNNParms']
         datates = Input['Features']
-        Test_Results = DecisionMaking(Params, datates)
+        Images = Input['Images']
+        Labels = Input['Labels']
+        Test_Results = DecisionMaking(Params, datates, Images, Labels, data_set)
         EstimatedLabels = Test_Results['EstimatedLabels']
         Scores = Test_Results['Scores']
         Output = {}
@@ -111,37 +107,57 @@ def xDNNclassifier(Data, Image):
     return dic
 
 
-def DecisionMaking(Params, datates):
+def DecisionMaking(Params, datates, Images, Labels, data_set):
     PARAM = Params['Parameters']
     CurrentNC = Params['CurrentNumberofClass']
     LAB = Params['MemberLabels']
-    VV = 1
     LTes = np.shape(datates)[0]
     EstimatedLabels = np.zeros((LTes))
     Scores = np.zeros((LTes, CurrentNC))
+
+    dataset_distances = []
+    dataset_distance_images = []
+
     for i in range(1, LTes + 1):
         data = datates[i - 1,]
-        R = np.zeros((VV, CurrentNC))
         Value = np.zeros((CurrentNC, 1))
-        top_distances_index = np.zeros((CurrentNC, 5))
+        distance_array = [np.empty(0)] * CurrentNC
+        distance_image_array = [np.empty(0)] * CurrentNC
+        # top_distances_index = np.zeros((CurrentNC, 5))
         for k in range(0, CurrentNC):
             distance = np.sort(cdist(data.reshape(1, -1), PARAM[k]['Centre'], 'minkowski', p=6))[0]
             # distance=np.sort(cdist(data.reshape(1, -1),PARAM[k]['Centre'],'euclidean'))[0]
 
             distance_index = np.argsort(cdist(data.reshape(1, -1), PARAM[k]['Centre'], 'minkowski', p=6))[0]
-            top_distances_index[k] = distance_index[0:5]
+            # top_distances_index[k] = distance_index[0:5]
 
             Value[k] = distance[0]
+            distance_array[k] = distance
+            distance_image_array[k] = distance_index
         Value = softmax(-1 * Value ** 2).T
         Scores[i - 1,] = Value
         Value = Value[0]
-        Value_new = np.sort(Value)[::-1]
         indx = np.argsort(Value)[::-1]
         matching_label = indx[0]
-        print(f"\nMatching label : {matching_label}\nTop 5 matching prototypes : \n", np.array(list((PARAM[matching_label]['Prototype']).items()))[top_distances_index[matching_label].astype(int)])
-        EstimatedLabels[i - 1] = indx[0]
-    LABEL1 = np.zeros((CurrentNC, 1))
+        print(f"{i} => Validate for image : {Images[i-1]} Original label : {Labels[i-1]} Matching label : {matching_label} Correct: {Labels[i-1]==matching_label}")
+        # print(f"\nMatching label : {matching_label}\nTop 5 matching prototypes : \n", np.array(list((PARAM[matching_label]['Prototype']).items()))[top_distances_index[matching_label].astype(int)])
+        # print(f"\nAll matching images : \n", np.array(list((PARAM[matching_label]['Prototype']).items()))[distance_image_array[matching_label].astype(int)][:, 1])
+        # print(f"\nAll matching distances : \n", distance_array[matching_label])
 
+        dataset_distances.append(distance_array[matching_label])
+        dataset_distance_images.append(np.array(list((PARAM[matching_label]['Prototype']).items()))[distance_image_array[matching_label].astype(int)][:, 1])
+
+        EstimatedLabels[i - 1] = indx[0]
+
+    import pandas as pd
+
+    df_dataset_distances = pd.DataFrame(dataset_distances)
+    df_dataset_distance_images = pd.DataFrame(dataset_distance_images)
+
+    df_dataset_distances.to_csv(f'testdata_results_{data_set}/dataset_distances.csv', header=False, index=False)
+    df_dataset_distance_images.to_csv(f'testdata_results_{data_set}/dataset_distance_images.csv', header=False, index=False)
+
+    LABEL1 = np.zeros((CurrentNC, 1))
     for i in range(0, CurrentNC):
         LABEL1[i] = np.unique(LAB[i])
 
@@ -151,5 +167,3 @@ def DecisionMaking(Params, datates):
     dic['EstimatedLabels'] = EstimatedLabels
     dic['Scores'] = Scores
     return dic
-
-###############################################################################
