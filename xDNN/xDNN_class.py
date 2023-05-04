@@ -132,8 +132,11 @@ def DecisionMaking(Params, datates, Images, Labels, data_set):
             # top_distances_index[k] = distance_index[0:5]
 
             Value[k] = distance[0]
+
+            # For storing
             distance_array[k] = distance
             distance_image_array[k] = distance_index
+
         Value = softmax(-1 * Value ** 2).T
         Scores[i - 1,] = Value
         Value = Value[0]
