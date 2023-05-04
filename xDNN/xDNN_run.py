@@ -86,15 +86,15 @@ def xDNN_run(data_set):
         print("Y test: ", y_test.shape)
         pd_y_test_labels = y_test[1]
         pd_y_test_images = y_test[0]
-        y_test_labels = pd_y_test_labels.to_numpy()[0:1000]
-        y_test_images = pd_y_test_images.to_numpy()[0:1000]
+        y_test_labels = pd_y_test_labels.to_numpy()
+        y_test_images = pd_y_test_images.to_numpy()
 
         Input2 = {}
         Input2['xDNNParms'] = Output1['xDNNParms']
 
         # Validate testing dataset
         Input2['Images'] = y_test_images
-        Input2['Features'] = X_test[0:1000]
+        Input2['Features'] = X_test
         Input2['Labels'] = y_test_labels
 
         # Validate only the first image of testing dataset

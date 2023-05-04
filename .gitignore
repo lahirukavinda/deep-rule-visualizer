@@ -6,4 +6,5 @@
 /.idea/vcs.xml
 /features_*
 /trained_model_*
+/trained_model_*/model.pkl
 /testdata_results_*
