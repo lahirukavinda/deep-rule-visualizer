@@ -8,6 +8,7 @@ from utils.dictionaries import *
 from xDNN.Feature_Extraction_VGG16 import *
 from xDNN.xDNN_run import *
 from data_processing.saving_mnist_as_jpg_images import *
+from UI.display import *
 
 if __name__ == '__main__':
     args = get_args(data_set_dict)
@@ -29,3 +30,5 @@ if __name__ == '__main__':
         print(f'Features are already available in features/{data_set} directory.\n')
 
     xDNN_run(data_set)
+
+    UI(data_set, data_set_dir)
