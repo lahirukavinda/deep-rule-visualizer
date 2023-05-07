@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-import os
-import sys
-from dotenv import load_dotenv
 
 from utils.arg_parse import *
 from utils.dictionaries import *
@@ -9,6 +6,7 @@ from xDNN.Feature_Extraction_VGG16 import *
 from xDNN.xDNN_run import *
 from data_processing.saving_mnist_as_jpg_images import *
 from UI.display import *
+from shap_values.lime_heatmap import *
 
 if __name__ == '__main__':
     args = get_args(data_set_dict)
@@ -31,4 +29,5 @@ if __name__ == '__main__':
 
     xDNN_run(data_set)
 
-    UI(data_set, data_set_dir)
+    # UI(data_set, data_set_dir)
+    # lime_heatmap(data_set, data_set_dir, 0) # 1845 0 as 3 # 13 9 as 4
