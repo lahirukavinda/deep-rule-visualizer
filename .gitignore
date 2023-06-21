@@ -8,3 +8,5 @@
 /trained_model_*
 /trained_model_*/model.pkl
 /testdata_results_*
+/results_*/*
+/results_*/final.pkl

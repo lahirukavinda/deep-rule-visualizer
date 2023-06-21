@@ -1,5 +1,6 @@
 import numpy as np
 
+# Pseudocode
 # function calculate_deep_rule_score(lime_score, distances_predicted, distances_expected):
 #     normalized_lime_score = normalize(lime_score)  # Normalize LIME score between 0 and 1
 #     normalized_distances_predicted = normalize(
@@ -13,7 +14,7 @@ import numpy as np
 #     return deep_rule_score
 
 lime_score = 0.54  # LIME score
-predicted_class_distances = [4.2, 5.1, 6.3, 5.8]  # Distances from input image to images in predicted class
+predicted_class_distances = [4.2]  # Distances from input image to images in predicted class
 other_class_distances = [3.9, 5.5, 4.7, 6.1]  # Distances from input image to images in other classes
 
 # Calculate the minimum distance for the predicted class

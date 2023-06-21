@@ -125,10 +125,11 @@ def DecisionMaking(Params, datates, Images, Labels, data_set):
         distance_image_array = [np.empty(0)] * CurrentNC
         # top_distances_index = np.zeros((CurrentNC, 5))
         for k in range(0, CurrentNC):
-            distance = np.sort(cdist(data.reshape(1, -1), PARAM[k]['Centre'], 'minkowski', p=6))[0]
+            minkowski_distance = cdist(data.reshape(1, -1), PARAM[k]['Centre'], 'minkowski', p=6)
+            distance = np.sort(minkowski_distance)[0]
             # distance=np.sort(cdist(data.reshape(1, -1),PARAM[k]['Centre'],'euclidean'))[0]
 
-            distance_index = np.argsort(cdist(data.reshape(1, -1), PARAM[k]['Centre'], 'minkowski', p=6))[0]
+            distance_index = np.argsort(minkowski_distance)[0]
             # top_distances_index[k] = distance_index[0:5]
 
             Value[k] = distance[0]
