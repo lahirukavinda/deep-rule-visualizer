@@ -6,6 +6,7 @@ from xDNN.Feature_Extraction_VGG16 import *
 from xDNN.xDNN_run import *
 from data_processing.saving_mnist_as_jpg_images import *
 from calculations.final_calculations import *
+from calculations.result_statistics import *
 from validation.occlusion_sensitivity import *
 
 if __name__ == '__main__':
@@ -37,3 +38,5 @@ if __name__ == '__main__':
     UI_V2(data_set, data_set_dir)
 
     # validation(data_set, data_set_dir)
+
+    # stats_calculate(data_set, data_set_dir)
